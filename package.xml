@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="de.mysterycode.wcf.guestredirect" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+	<packageinformation>
+		<packagename><![CDATA[Gäste zum Login umleiten]]></packagename>
+		<packagedescription><![CDATA[Leitet Gäste zum Anmelde/Registrierungsformular weiter.]]></packagedescription>
+		<version>1.0.0</version>
+		<date>2014-05-02</date>
+	</packageinformation>
+
+	<requiredpackages>
+		<requiredpackage minversion="2.0.4"><![CDATA[com.woltlab.wcf]]></requiredpackage>
+	</requiredpackages>
+
+	<authorinformation>
+		<author><![CDATA[Florian Gail]]></author>
+		<authorurl><![CDATA[http://www.mysterycode.de]]></authorurl>
+	</authorinformation>
+
+	<instructions type="install">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="eventListener">eventListener.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+</package>
