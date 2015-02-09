@@ -40,9 +40,10 @@ class GuestRedirectLoginListener implements IEventListener {
 		if ($className == 'wcf\page\LegalNoticePage')
 			return;
 		
-		if (!empty(GUEST_REDIRECT_EXCLUDES)) {
+		$excludeString = GUEST_REDIRECT_EXCLUDES;
+		if (!empty($excludeString)) {
 			$controllers = array();
-			$controllers = explode('\n', GUEST_REDIRECT_EXCLUDES);
+			$controllers = explode('\n', $excludeString);
 			
 			if (in_array($className, $controllers))
 				return;
