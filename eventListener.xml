@@ -8,5 +8,12 @@
 			<environment>user</environment>
 			<inherit>1</inherit>
 		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\page\AbstractPage</eventclassname>
+			<eventname>readParameters</eventname>
+			<listenerclassname>wcf\system\event\listener\GuestRedirectLoginListener</listenerclassname>
+			<environment>user</environment>
+			<inherit>1</inherit>
+		</eventlistener>
 	</import>
 </data>
