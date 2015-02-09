@@ -40,6 +40,14 @@ class GuestRedirectLoginListener implements IEventListener {
 		if ($className == 'wcf\page\LegalNoticePage')
 			return;
 		
+		if (!empty(GUEST_REDIRECT_EXCLUDES)) {
+			$controllers = array();
+			$controllers = explode('\n', GUEST_REDIRECT_EXCLUDES);
+			
+			if (in_array($className, $controllers))
+				return;
+		}
+		
 		if (WCF::getUser()->userID == 0) {
 			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Login', array()));
 			exit;

@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
 	<import>
+		<categories>
+			<category name="general.page.guestredirect">
+				<parent>general.page</parent>
+			</category>
+		</categories>
 		<options>
 			<option name="guest_redirect_login">
 				<categoryname>module.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue><![CDATA[1]]></defaultvalue>
+			</option>
+			<option name="guest_redirect_excludes">
+				<categoryname>general.page.guestredirect</categoryname>
+				<optiontype>textarea</optiontype>
+				<defaultvalue><![CDATA[]]></defaultvalue>
 			</option>
 		</options>
 	</import>
