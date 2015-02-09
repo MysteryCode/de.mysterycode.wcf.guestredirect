@@ -3,22 +3,30 @@
 	<packageinformation>
 		<packagename><![CDATA[Gäste zum Login umleiten]]></packagename>
 		<packagedescription><![CDATA[Leitet Gäste zum Anmelde/Registrierungsformular weiter.]]></packagedescription>
-		<version>1.0.0</version>
-		<date>2014-05-02</date>
+		<version>1.0.1</version>
+		<date>2015-02-09</date>
 	</packageinformation>
-
+	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.4"><![CDATA[com.woltlab.wcf]]></requiredpackage>
 	</requiredpackages>
-
+	
 	<authorinformation>
 		<author><![CDATA[Florian Gail]]></author>
 		<authorurl><![CDATA[http://www.mysterycode.de]]></authorurl>
 	</authorinformation>
-
+	
 	<instructions type="install">
 		<instruction type="file">files.tar</instruction>
+		
 		<instruction type="eventListener">eventListener.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="1.0.0">
+		<instruction type="file">files.tar</instruction>
+		
 		<instruction type="option">option.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
