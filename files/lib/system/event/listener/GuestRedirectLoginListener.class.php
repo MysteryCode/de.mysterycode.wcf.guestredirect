@@ -1,7 +1,6 @@
 <?php
 
 namespace wcf\system\event\listener;
-use wcf\system\event\IEventListener;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -9,48 +8,32 @@ use wcf\util\HeaderUtil;
 /**
  * Redirects guests to the login form
  *
- * @author	Florian Gail
- * @copyright	2014 Florian Gail <http://www.mysterycode.de/>
- * @license	Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
- * @package	de.mysterycode.wcf.guestredirect
- * @category	WCF
+ * @author       Florian Gail
+ * @copyright    2014 Florian Gail <http://www.mysterycode.de/>
+ * @license      Kostenlose Plugins <http://downloads.mysterycode.de/index.php/License/6-Kostenlose-Plugins/>
+ * @package      de.mysterycode.wcf.guestredirect
+ * @category     WCF
  */
-class GuestRedirectLoginListener implements IEventListener {
+class GuestRedirectLoginListener implements IParameterizedEventListener {
 	/**
-	 *
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
-	public function execute($eventObj, $className, $eventName) {
-		if (!GUEST_REDIRECT_LOGIN)
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
+		if (!GUEST_REDIRECT_LOGIN) return;
+
+		if (in_array($className, ['wcf\form\LoginForm', 'wcf\form\RegisterForm', 'wcf\form\RegisterActivationForm', 'wcf\form\DisclaimerForm', 'wcf\form\RegisterNewActivationCodeForm', 'wcf\form\LostPasswordForm', 'wcf\form\NewPasswordForm', 'wcf\page\LegalNoticePage'])) {
 			return;
-		if ($className == 'wcf\form\LoginForm')
-			return;
-		if ($className == 'wcf\form\RegisterForm')
-			return;
-		if ($className == 'wcf\form\RegisterActivationForm')
-			return;
-		if ($className == 'wcf\form\DisclaimerForm')
-			return;
-		if ($className == 'wcf\form\RegisterNewActivationCodeForm')
-			return;
-		if ($className == 'wcf\form\LostPasswordForm')
-			return;
-		if ($className == 'wcf\form\NewPasswordForm')
-			return;
-		if ($className == 'wcf\page\LegalNoticePage')
-			return;
-		
+		}
+
 		$excludeString = GUEST_REDIRECT_EXCLUDES;
 		if (!empty($excludeString)) {
-			$controllers = array();
 			$controllers = explode('\n', $excludeString);
-			
-			if (in_array($className, $controllers))
-				return;
+
+			if (in_array($className, $controllers)) return;
 		}
-		
-		if (WCF::getUser()->userID == 0) {
-			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Login', array()));
+
+		if (!WCF::getUser()->userID) {
+			HeaderUtil::redirect(LinkHandler::getInstance()->getLink('Login'));
 			exit;
 		}
 	}
